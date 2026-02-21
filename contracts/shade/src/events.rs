@@ -117,6 +117,7 @@ pub fn publish_role_revoked_event(
     .publish(env);
 }
 
+#[contractevent]
 pub struct ContractPausedEvent {
     pub admin: Address,
     pub timestamp: u64,
