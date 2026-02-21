@@ -1,5 +1,5 @@
 use crate::types::{Invoice, InvoiceFilter, Merchant, MerchantFilter, Role};
-use soroban_sdk::{contracttrait, Address, BytesN, Env, String, Vec};
+use soroban_sdk::{contracttrait, Address, Env, String, Vec};
 
 #[contracttrait]
 pub trait ShadeTrait {
@@ -22,8 +22,8 @@ pub trait ShadeTrait {
         token: Address,
     ) -> u64;
     fn get_invoice(env: Env, invoice_id: u64) -> Invoice;
-    fn set_merchant_key(env: Env, merchant: Address, key: BytesN<32>);
-    fn get_merchant_key(env: Env, merchant: Address) -> BytesN<32>;
+    fn set_merchant_key(env: Env, merchant: Address, key: String);
+    fn get_merchant_key(env: Env, merchant: Address) -> String;
     fn grant_role(env: Env, admin: Address, user: Address, role: Role);
     fn revoke_role(env: Env, admin: Address, user: Address, role: Role);
     fn has_role(env: Env, user: Address, role: Role) -> bool;
