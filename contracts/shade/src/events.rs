@@ -92,6 +92,62 @@ pub fn publish_merchant_verified_event(env: &Env, merchant_id: u64, status: bool
 }
 
 #[contractevent]
+pub struct MerchantKeySetEvent {
+    pub merchant: Address,
+    pub timestamp: u64,
+}
+
+pub fn publish_merchant_key_set_event(env: &Env, merchant: Address, timestamp: u64) {
+    MerchantKeySetEvent {
+        merchant,
+        timestamp,
+    }
+    .publish(env);
+}
+
+#[contractevent]
+pub struct RoleGrantedEvent {
+    pub user: Address,
+    pub role: crate::types::Role,
+    pub timestamp: u64,
+}
+
+pub fn publish_role_granted_event(
+    env: &Env,
+    user: Address,
+    role: crate::types::Role,
+    timestamp: u64,
+) {
+    RoleGrantedEvent {
+        user,
+        role,
+        timestamp,
+    }
+    .publish(env);
+}
+
+#[contractevent]
+pub struct RoleRevokedEvent {
+    pub user: Address,
+    pub role: crate::types::Role,
+    pub timestamp: u64,
+}
+
+pub fn publish_role_revoked_event(
+    env: &Env,
+    user: Address,
+    role: crate::types::Role,
+    timestamp: u64,
+) {
+    RoleRevokedEvent {
+        user,
+        role,
+        timestamp,
+    }
+    .publish(env);
+}
+
+#[contractevent]
 pub struct ContractPausedEvent {
     pub admin: Address,
     pub timestamp: u64,

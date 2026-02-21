@@ -9,6 +9,7 @@ pub enum DataKey {
     ContractInfo,
     AcceptedTokens,
     Merchant(u64),
+    MerchantKey(Address),
     MerchantCount,
     MerchantId(Address),
     MerchantTokens,
@@ -16,6 +17,7 @@ pub enum DataKey {
     Invoice(u64),
     InvoiceCount,
     ReentrancyStatus,
+    Role(Address, Role),
 }
 
 #[contracttype]
@@ -73,4 +75,12 @@ pub struct InvoiceFilter {
     pub merchant: Option<Address>,
     pub min_amount: Option<u128>,
     pub max_amount: Option<u128>,
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum Role {
+    Admin,
+    Manager,
+    Operator,
 }
