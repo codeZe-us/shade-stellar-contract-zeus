@@ -65,6 +65,7 @@ fn test_set_merchant_key_authorization() {
 
 #[test]
 #[should_panic(expected = "HostError: Error(Contract, #11)")]
+
 fn test_get_non_existent_key() {
     let (env, client, _contract_id, _admin) = setup_test();
 

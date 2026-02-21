@@ -157,4 +157,3 @@ pub fn get_merchants(env: &Env, filter: MerchantFilter) -> Vec<Merchant> {
 
     merchants
 }
-
