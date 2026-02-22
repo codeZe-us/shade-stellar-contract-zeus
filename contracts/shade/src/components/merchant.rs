@@ -2,7 +2,7 @@ use crate::components::core as core_component;
 use crate::errors::ContractError;
 use crate::events;
 use crate::types::{DataKey, Merchant, MerchantFilter};
-use soroban_sdk::{panic_with_error, Address, Env, String, Vec};
+use soroban_sdk::{panic_with_error, Address, BytesN, Env, Vec};
 
 pub fn register_merchant(env: &Env, merchant: &Address) {
     merchant.require_auth();
@@ -94,7 +94,7 @@ pub fn is_merchant_verified(env: &Env, merchant_id: u64) -> bool {
     merchant_data.verified
 }
 
-pub fn set_merchant_key(env: &Env, merchant: &Address, key: &String) {
+pub fn set_merchant_key(env: &Env, merchant: &Address, key: &BytesN<32>) {
     merchant.require_auth();
 
     if !is_merchant(env, merchant) {
@@ -113,7 +113,7 @@ pub fn set_merchant_key(env: &Env, merchant: &Address, key: &String) {
     );
 }
 
-pub fn get_merchant_key(env: &Env, merchant: &Address) -> String {
+pub fn get_merchant_key(env: &Env, merchant: &Address) -> BytesN<32> {
     env.storage()
         .persistent()
         .get(&DataKey::MerchantKey(merchant.clone()))
