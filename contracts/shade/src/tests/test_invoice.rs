@@ -60,16 +60,23 @@ fn test_set_merchant_key_success() {
 
     assert_eq!(client.get_merchant_key(&merchant), key);
 
-    assert!(events.len() > 0, "No events captured immediately after key set!");
-    
+    assert!(
+        events.len() > 0,
+        "No events captured immediately after key set!"
+    );
+
     let (event_contract_id, _topics, data) = events.get(events.len() - 1).unwrap();
     assert_eq!(event_contract_id, contract_id.clone());
 
     let data_map: Map<Symbol, Val> = data.try_into_val(&env).expect("Data should be a Map");
 
-    let merchant_val = data_map.get(Symbol::new(&env, "merchant")).expect("Should have merchant field");
-    let key_val = data_map.get(Symbol::new(&env, "key")).expect("Should have key field");
-    
+    let merchant_val = data_map
+        .get(Symbol::new(&env, "merchant"))
+        .expect("Should have merchant field");
+    let key_val = data_map
+        .get(Symbol::new(&env, "key"))
+        .expect("Should have key field");
+
     let merchant_in_event: Address = merchant_val.try_into_val(&env).unwrap();
     let key_in_event: String = key_val.try_into_val(&env).unwrap();
 

@@ -61,7 +61,10 @@ fn test_verify_account() {
 
     assert_eq!(client.is_verified_account(), true);
 
-    assert!(events.len() > 0, "No events captured immediately after verify_account!");
+    assert!(
+        events.len() > 0,
+        "No events captured immediately after verify_account!"
+    );
     let (_event_contract_id, _topics, _data) = events.get(events.len() - 1).unwrap();
 }
 
